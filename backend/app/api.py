@@ -30,11 +30,12 @@ app.add_middleware(
 )
 
 @app.get("/", tags=["root"] )
-async def read_root() -> dict:
+async def read_root():
     return "Welcome to the Pokemon world!"
 
-@app.get("/all")
-async def load_all():
+@app.get("/pokemons", tags=["pokemons"])
+async def get_pokemons():
     return parse_csv(df)
+    # return {"data": parse_csv(df)}
 
 
