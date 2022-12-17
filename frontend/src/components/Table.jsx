@@ -10,77 +10,77 @@ import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 
 const Table = () => {
   const [pokemons, setPokemons] = useState([]);
-  
-  
+
   useEffect(() => {
     (async () => {
       const fetchedPokemons = await fetchPokemons();
-      setPokemons(fetchedPokemons)
-    })()
+      setPokemons(fetchedPokemons);
+    })();
   }, []);
-  
-  console.log("in the table ", pokemons)
-  
+
+  console.log("in the table ", pokemons);
+
   const columns = [
-    { field: "id", headerName: "ID", width: 70 },
-    { field: "name", headerName: "Name", width: 130 },
-    { field: "type 1", headerName: "Type 1", width: 130 },
-    { field: "type 2", headerName: "Type 2", width: 130 },
+    { field: "Id", headerName: "ID", width: 50 },
+    { field: "Number", headerName: "Number", width: 70 },
+    { field: "Name", headerName: "Name", width: 150 },
+    { field: "Type1", headerName: "Type 1", width: 130 },
+    { field: "Type2", headerName: "Type 2", width: 130 },
     {
-      field: "total",
+      field: "Total",
       headerName: "Total",
       // type: "number",
       width: 90,
     },
     {
-      field: "hp",
+      field: "HP",
       headerName: "HP",
       // type: "number",
       width: 90,
     },
     {
-      field: "attack",
+      field: "Attack",
       headerName: "Attack",
       // type: "number",
       width: 130,
     },
     {
-      field: "defense",
+      field: "Defense",
       headerName: "Defense",
       // type: "number",
       width: 130,
     },
     {
-      field: "sp. atk",
-      headerName: "Sp. Atk",
+      field: "Sp.Atk",
+      headerName: "Sp.Atk",
       // type: "number",
       width: 130,
     },
     {
-      field: "sp. def",
-      headerName: "Sp. Def",
+      field: "Sp.Def",
+      headerName: "Sp.Def",
       // type: "number",
       width: 130,
     },
     {
-      field: "speed",
+      field: "Speed",
       headerName: "Speed",
       // type: "number",
       width: 130,
     },
     {
-      field: "generation",
+      field: "Generation",
       headerName: "Generation",
       // type: "number",
       width: 130,
     },
     {
-      field: "legendary",
+      field: "Legendary",
       headerName: "Legendary",
       width: 130,
     },
   ];
-  
+
   const rows = [
     // { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
     // { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
@@ -92,20 +92,26 @@ const Table = () => {
     // { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
     // { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
   ];
-  
-    return (
-      <div style={{ height: 400, width: "100%", }}>
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
-        />
-      </div>
-    );
 
-}
+  // const rows = pokemons.map(
+  //   pokemom => {
+  //     id=`${pokemom.id}`
+  //     name=`${pokemom.name}`
+
+  //   }
+  // )
+
+  return (
+    <div style={{ height: 1000, width: "100%" }}>
+      <DataGrid
+        getRowId={(row) => row.Id}
+        rows={pokemons}
+        columns={columns}
+        pageSize={25}
+        rowsPerPageOptions={[5]}
+      />
+    </div>
+  );
+};
 
 export default Table;
-
-
