@@ -11,8 +11,9 @@ def parse_csv(df):
     parsed = json.loads(res)
     return parsed
 
-print(df)
 # print(df.to_string())
+
+print(df[df["Name"] == "Bulbasaur"])
 
 app = FastAPI()
 
@@ -29,13 +30,15 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-@app.get("/", tags=["root"] )
-async def read_root():
-    return "Welcome to the Pokemon world!"
-
-@app.get("/pokemons", tags=["pokemons"])
+@app.get("/", tags=["pokemons"])
 async def get_pokemons():
     return parse_csv(df)
     # return {"data": parse_csv(df)}
+
+# @app.get("/", tags=["pokemons"])
+# async def get_pokemons():
+#     return parse_csv(df)
+#     # return {"data": parse_csv(df)}
+
 
 
