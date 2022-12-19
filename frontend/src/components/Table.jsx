@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { DataGrid} from "@mui/x-data-grid";
+import { DataGrid, GridFilterModel } from "@mui/x-data-grid";
+// const { columns, useQuery } = createFakeServer();
 
-const Table = ({pokemons}) => {
+const Table = ({ pokemons }) => {
+  // const [queryOptions, setQueryOptions] = React.useState({});
 
-  console.log("in the table", pokemons)
+  // const onFilterChange = React.useCallback((filterModel: GridFilterModel) => {
+  //   // Here you save the data you need from the filter model
+  //   setQueryOptions({ filterModel: { ...filterModel } });
+  // }, []);
+
+  // const { isLoading, data } = useQuery(queryOptions);
 
   const columns = [
     { field: "Id", headerName: "ID", width: 70 },
@@ -63,6 +70,8 @@ const Table = ({pokemons}) => {
       <DataGrid
         getRowId={(row) => row.Id}
         filterMode="server"
+        disableColumnFilter={true}
+        disableColumnSelector={true}
         // onFilterModelChange={onFilterChange}
         // loading={isLoading}
         rows={pokemons}
