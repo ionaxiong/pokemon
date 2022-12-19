@@ -11,7 +11,7 @@ const Table = ({ pokemons }) => {
   // }, []);
 
   // const { isLoading, data } = useQuery(queryOptions);
-
+  console.log("pokemons data type?")
   const columns = [
     { field: "Id", headerName: "ID", width: 70 },
     { field: "Number", headerName: "Number", width: 100 },

@@ -7,6 +7,5 @@ export const fetchPokemons = async() => {
 export const fetchHeaders = async() => {
     const res = await fetch("http://localhost:8000/headers");
     const data = await res.json()
-    console.log(typeof data, "from api")
     return data
 };
