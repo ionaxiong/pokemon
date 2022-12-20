@@ -18,5 +18,3 @@ zip -r9 ../../../../function.zip .
 cd ../../../../
 
 zip -g ./function.zip -r app
-
-zip -g ./function.zip -r lambda_function.py

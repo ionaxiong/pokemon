@@ -41,9 +41,16 @@ print("df keys:!!!!!!!!!!!!!!!", df.keys())
 
 app = FastAPI()
 
+
+# local
 origins = [
     "http://localhost:3000",
     "localhost:3000"
+]
+
+# deployment
+origins = [
+    "http://pokemon.ionaxiong.com.s3-website.eu-central-1.amazonaws.com",
 ]
 
 app.add_middleware(
