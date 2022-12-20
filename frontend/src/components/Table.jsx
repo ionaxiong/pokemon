@@ -1,17 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { DataGrid, GridFilterModel } from "@mui/x-data-grid";
-// const { columns, useQuery } = createFakeServer();
 
 const Table = ({ pokemons }) => {
-  // const [queryOptions, setQueryOptions] = React.useState({});
-
-  // const onFilterChange = React.useCallback((filterModel: GridFilterModel) => {
-  //   // Here you save the data you need from the filter model
-  //   setQueryOptions({ filterModel: { ...filterModel } });
-  // }, []);
-
-  // const { isLoading, data } = useQuery(queryOptions);
+ 
   console.log("pokemons data type?")
+  
   const columns = [
     { field: "Id", headerName: "ID", width: 70 },
     { field: "Number", headerName: "Number", width: 100 },
