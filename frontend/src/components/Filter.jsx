@@ -1,41 +1,52 @@
-import React, { useEffect, useState } from "react";
-import { TextField, Stack, Button } from "@mui/material";
-import ControlPointIcon from "@mui/icons-material/ControlPoint";
+import React, { useState } from "react";
+import { TextField, Stack } from "@mui/material";
 import Autocomplete from "@mui/material/Autocomplete";
-import { fetchPokemons, fetchHeaders } from "../services/api";
-import Table from "./Table";
+import DeleteButton from "./DeleteButton";
 
-const Filter = () => {
-  const [pokemons, setPokemons] = useState([]);
-  const [headers, setHeaders] = useState([]);
-  const [headerOption, setHeaderOption] = useState();
+const Filter = ({ tableHeaders, removeFilter, handleRemoveFilter }) => {
+  const [tableHeaderOption, setTableHeaderOption] = useState();
 
   const conditionsForStrings = ["=", "≠"];
   const conditionsForNumbers = ["=", "≠", ">", ">=", "<", "<="];
   const noOptionsText = ["Choose a header to continue filtering"];
 
-  console.log("header option now is : ", headerOption);
-  console.log(typeof headerOption, "typf of header option");
-  //   console.log("print filter pokemons: ", pokemons);
-  //   console.log("print filter headers: ", headers);
+  const filterField = () => {
+    return (
+      <Stack direction="row" justifyContent={"center"}>
+        <Autocomplete
+          style={{ margin: "1vh 0" }}
+          id="header"
+          options={tableHeaders}
+          sx={{ width: 300 }}
+          renderInput={(header) => (
+            <TextField {...header} label="Header filter" variant="outlined" />
+          )}
+          onChange={(event, value) => setTableHeaderOption(value)}
+        />
+        {conditionFilterOptions()}
 
-  useEffect(() => {
-    (async () => {
-      const fetchedPokemons = await fetchPokemons();
-      const fetchedHeaders = await fetchHeaders();
-      setPokemons(fetchedPokemons);
-      setHeaders(fetchedHeaders);
-    })();
-  }, []);
+        <Autocomplete
+          style={{ margin: "1vh 0", marginLeft: "1vh" }}
+          id="value"
+          options={tableHeaders}
+          sx={{ width: 300 }}
+          renderInput={(header) => (
+            <TextField {...header} label="Value" variant="outlined" />
+          )}
+        />
+        <DeleteButton handleRemoveFilter={handleRemoveFilter} />
+      </Stack>
+    );
+  };
 
   const conditionFilterOptions = () => {
-    if (!headerOption) {
+    if (!tableHeaderOption) {
       return (
         <div>
           {
             <Autocomplete
-              style={{ margin: "15px 0", marginLeft: "15px" }}
-              id="conditions"
+              style={{ margin: "1vh 0", marginLeft: "1vh" }}
+              id="condition"
               getOptionDisabled={() => true}
               options={noOptionsText}
               sx={{ width: 300 }}
@@ -51,97 +62,42 @@ const Filter = () => {
         </div>
       );
     } else if (
-      (headerOption === "Name") |
-      (headerOption === "Type1") |
-      (headerOption === "Type2") |
-      (headerOption === "Legendary")
+      (tableHeaderOption === "Name") |
+      (tableHeaderOption === "Type1") |
+      (tableHeaderOption === "Type2") |
+      (tableHeaderOption === "Legendary")
     ) {
       return (
         <div>
           <Autocomplete
-            style={{ margin: "15px 0", marginLeft: "15px" }}
-            id="conditions"
+            style={{ margin: "1vh 0", marginLeft: "1vh" }}
+            id="condition"
             options={conditionsForStrings}
             sx={{ width: 300 }}
             renderInput={(condition) => (
               <TextField {...condition} label="Condition" variant="outlined" />
             )}
           />
-          ;
         </div>
       );
     } else {
       return (
         <div>
           <Autocomplete
-            style={{ margin: "15px 0", marginLeft: "15px" }}
-            id="conditions"
+            style={{ margin: "1vh 0", marginLeft: "1vh" }}
+            id="condition"
             options={conditionsForNumbers}
             sx={{ width: 300 }}
             renderInput={(condition) => (
               <TextField {...condition} label="Condition" variant="outlined" />
             )}
           />
-          ;
         </div>
       );
     }
   };
 
-  return (
-    <div>
-      <Stack direction="row" justifyContent={"center"}>
-        <Autocomplete
-          style={{ margin: "15px 0" }}
-          id="headers"
-          options={headers}
-          sx={{ width: 300 }}
-          renderInput={(header) => (
-            <TextField {...header} label="Header filter" variant="outlined" />
-          )}
-          onChange={(event, value) => setHeaderOption(value)}
-        />
-        {conditionFilterOptions()}
-        {/* {(headerOption === "Name") |
-        (headerOption === "Type1") |
-        (headerOption === "Type2") |
-        (headerOption === "Legendary") ? (
-          <Autocomplete
-            style={{ margin: "15px 0", marginLeft: "15px" }}
-            id="conditions"
-            options={conditionsForStrings}
-            sx={{ width: 300 }}
-            renderInput={(condition) => (
-              <TextField {...condition} label="Condition" variant="outlined" />
-            )}
-          />
-        ) : (
-          <Autocomplete
-            style={{ margin: "15px 0", marginLeft: "15px" }}
-            id="conditions"
-            options={conditionsForNumbers}
-            sx={{ width: 300 }}
-            renderInput={(condition) => (
-              <TextField {...condition} label="Condition" variant="outlined" />
-            )}
-          />
-        )} */}
-        <Autocomplete
-          style={{ margin: "15px 0", marginLeft: "15px" }}
-          id="headers"
-          options={headers}
-          sx={{ width: 300 }}
-          renderInput={(header) => (
-            <TextField {...header} label="Value" variant="outlined" />
-          )}
-        />
-        <Button style={{ margin: "0 0 0 20px " }}>
-          <ControlPointIcon color="primary" sx={{ fontSize: 40 }} />
-        </Button>
-      </Stack>
-      <Table pokemons={pokemons} />
-    </div>
-  );
+  return <div>{!removeFilter ? filterField() : null}</div>;
 };
 
 export default Filter;

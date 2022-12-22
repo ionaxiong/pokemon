@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { DataGrid, GridFilterModel } from "@mui/x-data-grid";
+import React from "react";
+import { DataGrid } from "@mui/x-data-grid";
 
 const Table = ({ pokemons }) => {
  
@@ -59,7 +59,7 @@ const Table = ({ pokemons }) => {
   ];
 
   return (
-    <div style={{ height: 1000, width: "100%" }}>
+    <div style={{ height: 1000, width: "100%", marginTop: "5vh" }}>
       <DataGrid
         getRowId={(row) => row.Id}
         filterMode="server"
@@ -69,8 +69,8 @@ const Table = ({ pokemons }) => {
         // loading={isLoading}
         rows={pokemons}
         columns={columns}
-        pageSize={20}
-        rowsPerPageOptions={[5]}
+        // pageSize={16}
+        // rowsPerPageOptions={[5]}
       />
     </div>
   );
