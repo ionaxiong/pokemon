@@ -5,27 +5,29 @@ import AddButton from "./AddButton";
 
 const GroupFilters = ({ tableHeaders }) => {
   const [removeFilter, setRemoveFilter] = useState(true);
-  // const [removeFilter, setRemoveFilter] = useState(true);
-  // const [addFilter, setAddFilter] = useState(false);
-  // const [isFilterExisted, setIsFilterExisted] = useState(false)
-  const [isFilterExisted, setIsFilterExisted] = useState(false);
+  // const [filterExists, setFilterExists] = useState(false);
 
   const handleRemoveFilter = () => {
     setRemoveFilter(true);
-    setIsFilterExisted(false);
+    // setFilterExists(false);
   };
 
   const handleAddFilter = () => {
     setRemoveFilter(false);
-    setIsFilterExisted(true);
+    // setFilterExists(true);
   };
 
-  const handleAddFirstAndAdditionalFilter = () => {
-    !isFilterExisted ? handleAddFilter() : handleAddAdditionalFilter();
-  };
-  const handleAddAdditionalFilter = () => {
-    
-  };
+  // const handleAddFirstAndAdditionalFilter = () => {
+  //   !filterExists ? handleAddFirstFilter() : handleAddAdditionalFilter();
+  // };
+
+  // const handleAddAdditionalFilter = () => {
+
+  // };
+
+  // const handleAddFirstFilter = () => {
+  //   handleAddFilter();
+  // };
 
   return (
     <div>
@@ -36,7 +38,7 @@ const GroupFilters = ({ tableHeaders }) => {
       />
       <Stack justifyContent={"center"}>
         <AddButton
-          handleAddFirstAndAdditionalFilter={handleAddFirstAndAdditionalFilter}
+          handleAddFilter={handleAddFilter}
         />
       </Stack>
     </div>
