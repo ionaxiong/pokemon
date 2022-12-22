@@ -7,6 +7,8 @@ import json
 
 df = pd.read_csv("./app/pokemon.csv")
 
+print("table heads", df.head())
+
 df = df.astype({"Id": int,
 "Number": int,
 "Name": str,
@@ -30,9 +32,9 @@ def parse_csv(df):
 
 # print(df.to_string())
 
-print(df[df["Name"] == "Bulbasaur"])
+# print("filter with name bulbasaur: ", df[df["Name"] == "Bulbasaur"])
 
-print("df keys:!!!!!!!!!!!!!!!", df.keys())
+# print("df keys", df.keys())
 
 # print(df[['Name']].dtypes, "backend check 'Number' column data type")
 # print(df[['Legendary']].dtypes, "backend check 'Id' column data type")
@@ -42,16 +44,16 @@ print("df keys:!!!!!!!!!!!!!!!", df.keys())
 app = FastAPI()
 
 
-# local
+# development
 origins = [
     "http://localhost:3000",
     "localhost:3000"
 ]
 
-# deployment
-origins = [
-    "http://pokemon.ionaxiong.com.s3-website.eu-central-1.amazonaws.com",
-]
+# production
+# origins = [
+#     "http://pokemon.ionaxiong.com.s3-website.eu-central-1.amazonaws.com",
+# ]
 
 app.add_middleware(
     CORSMiddleware,
